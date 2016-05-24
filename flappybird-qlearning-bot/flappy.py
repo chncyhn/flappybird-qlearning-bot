@@ -1,6 +1,5 @@
 from itertools import cycle
 from bot import Bot
-from pykeyboard import PyKeyboard
 
 import random
 import sys
@@ -158,10 +157,7 @@ def showWelcomeAnimation():
 
 
     while True:
-        ''' Commented out the press key functionality
-        k = PyKeyboard()
-        k.press_key(k.space_key)
-        k.release_key(k.space_key)
+        ''' De-activated the press key functionality
 
         for event in pygame.event.get():
             if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
@@ -176,14 +172,12 @@ def showWelcomeAnimation():
                     'playerIndexGen': playerIndexGen,
                 }
         '''
-        #################################################### SİLLLLLLLLLLLLL
         SOUNDS['wing'].play()
         return {
             'playery': playery + playerShmVals['val'],
             'basex': basex,
             'playerIndexGen': playerIndexGen,
         }
-        ####################################################
 
         # adjust playery, playerIndex, basex
         if (loopIter + 1) % 5 == 0:
@@ -354,11 +348,7 @@ def showGameOverScreen(crashInfo):
         SOUNDS['die'].play()
 
     while True:
-        '''
-        k = PyKeyboard()
-        k.press_key(k.space_key)
-        k.release_key(k.space_key)
-
+        ''' De-activated press key functionality again
         for event in pygame.event.get():
             if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
                 pygame.quit()
@@ -367,10 +357,10 @@ def showGameOverScreen(crashInfo):
                 if (playery + playerHeight >= BASEY - 1) or True:
                     return
         '''
-        ######################################################## DENEME SIL
+
         if (playery + playerHeight >= BASEY - 1) or True:
             return
-        ########################################################
+
         # player y shift
         if playery + playerHeight < BASEY - 1:
             playery += min(playerVelY, BASEY - playery - playerHeight)
@@ -441,7 +431,6 @@ def checkCrash(player, upperPipes, lowerPipes):
     player['h'] = IMAGES['player'][0].get_height()
 
     # if player crashes into ground
-    ''' HUGE CHANGE HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE '''
     if (player['y'] + player['h'] >= BASEY - 1 ) or (player['y'] + player['h'] <= 0):
         return [True, True]
     else:
