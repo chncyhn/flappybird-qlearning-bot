@@ -11,7 +11,6 @@ for x in chain(list(range(-40,140,20)), list(range(140,421,70))):
         for v in range(-10,11):
             qval[str(x)+'_'+str(y)+'_'+str(v)] = [0,0]
 
-print('Number of states: ' + len(qval))
 
 fd = open('qvalues.json', 'w')
 json.dump(qval, fd)
