@@ -163,7 +163,7 @@ def showWelcomeAnimation():
             if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
                 pygame.quit()
                 sys.exit()
-            if (event.type == KEYDOWN and (event.key == K_SPACE or event.key == K_UP)) or True:
+            if event.type == KEYDOWN and (event.key == K_SPACE or event.key == K_UP):
                 # make first flap sound and return values for mainGame
                 SOUNDS['wing'].play()
                 return {
@@ -348,18 +348,16 @@ def showGameOverScreen(crashInfo):
         SOUNDS['die'].play()
 
     while True:
-        ''' De-activated press key functionality again
+        ''' De-activated press key functionality
         for event in pygame.event.get():
             if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
                 pygame.quit()
                 sys.exit()
-            if (event.type == KEYDOWN and (event.key == K_SPACE or event.key == K_UP)) or True :
-                if (playery + playerHeight >= BASEY - 1) or True:
+            if event.type == KEYDOWN and (event.key == K_SPACE or event.key == K_UP):
+                if playery + playerHeight >= BASEY - 1:
                     return
         '''
-
-        if (playery + playerHeight >= BASEY - 1) or True:
-            return
+        return ### Must remove to activate press-key functionality
 
         # player y shift
         if playery + playerHeight < BASEY - 1:
