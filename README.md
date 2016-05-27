@@ -4,7 +4,7 @@ Flappy Bird Bot using Reinforcement Learning in Python
 
 A Flappy Bird bot in Python, that learns from each game played via Q-Learning.
 
-[Youtube Link](https://www.youtube.com/watch?v=THb3og0MDIY) 
+[Youtube Link](https://www.youtube.com/watch?v=79BWQUN_Njc) 
 ###How it works
 
 With every game played, the bird observes the states it has been in, and the actions it took. With regards to their outcomes, it punishes or rewards the state-action pairs. After playing the game numerous times, the bird is able to consistently obtain high scores. 
