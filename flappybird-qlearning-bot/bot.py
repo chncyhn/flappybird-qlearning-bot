@@ -1,8 +1,5 @@
 import json
 
-#Reward function
-r =     {0 : 1,
-        1 : -1000}
 
 class Bot(object):
     # The Bot class that applies the Qlearning logic to Flappy bird game
@@ -12,6 +9,7 @@ class Bot(object):
         self.gameCNT = 0 # Game count of current run, incremented after every death
         self.DUMPING_N = 25 # Number of iterations to dump Q values to JSON after
         self.discount = 1.0
+        self.r = {0: 1, 1: -1000} # Reward function
         self.lr = 0.7
         self.load_qvalues()
         self.last_state = "420_240_0"
@@ -61,14 +59,14 @@ class Bot(object):
             act = exp[1]
             res_state = exp[2]
             if t == 1 or t==2:
-                self.qvalues[state][act] = (1- self.lr) * (self.qvalues[state][act]) + (self.lr) * ( r[1] + (self.discount)*max(self.qvalues[res_state]) )
+                self.qvalues[state][act] = (1- self.lr) * (self.qvalues[state][act]) + (self.lr) * ( self.r[1] + (self.discount)*max(self.qvalues[res_state]) )
 
             elif high_death_flag and act:
-                self.qvalues[state][act] = (1- self.lr) * (self.qvalues[state][act]) + (self.lr) * ( r[1] + (self.discount)*max(self.qvalues[res_state]) )
+                self.qvalues[state][act] = (1- self.lr) * (self.qvalues[state][act]) + (self.lr) * ( self.r[1] + (self.discount)*max(self.qvalues[res_state]) )
                 high_death_flag = False
 
             else:
-                self.qvalues[state][act] = (1- self.lr) * (self.qvalues[state][act]) + (self.lr) * ( r[0] + (self.discount)*max(self.qvalues[res_state]) )
+                self.qvalues[state][act] = (1- self.lr) * (self.qvalues[state][act]) + (self.lr) * ( self.r[0] + (self.discount)*max(self.qvalues[res_state]) )
 
             t += 1
 
