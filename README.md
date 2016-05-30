@@ -27,3 +27,5 @@ As it can be seen, after around 1500 game iterations, the bot learns to play qui
 https://github.com/sourabhv/FlapPyBird
 
 http://sarvagyavaish.github.io/FlappyBirdRL/
+
+https://github.com/mihaibivol/Q-learning-tic-tac-toe
