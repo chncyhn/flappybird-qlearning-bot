@@ -1,6 +1,6 @@
 Flappy Bird Bot using Reinforcement Learning in Python
 ===================
-![4000+ scored](http://i.imgur.com/ZEB1ivb.png)
+![4000+ scored](http://i.imgur.com/00Mf320.png)
 
 A Flappy Bird bot in Python, that learns from each game played via Q-Learning.
 
@@ -18,7 +18,7 @@ I defined the states a little different from sarvagyavaish. In his version **hor
 
 I also changed the algorithm a bit. Instead of updating Q-values with each experience observed, I went backward  after each game played. So, **Q-values are calculated going backwards from the last experience to first**. I figured this would help propagate the “bad state” information faster. In addition if the bird dies by **collapsing to the top-section of a pipe**, the **state where bird jumped** gets flagged and is punished additionally. This works nice, since dying to the top-section of the pipe is almost always the result of a bad jump. The flagging helps propagating the information to this ‘bad’ [s,a] pair quickly.
 
-![Learning Graph](http://i.imgur.com/eoi9Xd8.png)
+![Learning Graph](http://i.imgur.com/Xm8WPYk.png)
 
 As it can be seen, after around 1500 game iterations, the bot learns to play quite good, averaging about 150 score, and also occasionally hitting very good max scores.
 
