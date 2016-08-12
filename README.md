@@ -25,11 +25,7 @@ As it can be seen, after around 1500 game iterations, the bot learns to play qui
 ----------
 ###Update
 
-With **5x5 grids** instead of 10x10 (and also **y velocity** still in the state space), the result turned out to be as follows:
-
-![Learning Graph 2](http://i.imgur.com/MD0ivfj.png)  
-
-We see that the convergence takes longer, but it converges to around 675 score, significantly beating the 150 score of the previous run. Also, the bird is able reach very high scores (3000+) many times.
+With **5x5 grids** instead of 10x10 (and also **y velocity** still in the state space), the convergence takes longer, but it converges to around 675 score, significantly beating the 150 score of the previous run. Also, the bird is able reach very high scores (3000+) quite many times.
 
 
 **Credits**
