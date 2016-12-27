@@ -20,12 +20,14 @@ I also changed the algorithm a bit. Instead of updating Q-values with each exper
 
 ![Learning Graph](http://i.imgur.com/Xm8WPYk.png)
 
-As it can be seen, after around 1500 game iterations, the bot learns to play quite good, averaging about 150 score, and also occasionally hitting very good max scores.
+As it can be seen, after around 1500 game iterations, the bot learns to play quite well, averaging about 150 score, and also occasionally hitting very good max scores.
 
 ----------
 ###Update
 
 With **5x5 grids** instead of 10x10 (and also **y velocity** still in the state space), the convergence takes longer, but it converges to around 675 score, significantly beating the 150 score of the previous run. Also, the bird is able reach very high scores (3000+) quite many times.
+
+![Learning Graph II](http://i.imgur.com/E3Vy0OR.png)
 
 
 **Credits**
