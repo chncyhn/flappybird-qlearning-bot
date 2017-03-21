@@ -5,7 +5,8 @@ Flappy Bird Bot using Reinforcement Learning in Python
 A Flappy Bird bot in Python, that learns from each game played via Q-Learning.
 
 [Youtube Link](https://www.youtube.com/watch?v=79BWQUN_Njc) 
-###How it works
+
+### How it works
 
 With every game played, the bird observes the states it has been in, and the actions it took. With regards to their outcomes, it punishes or rewards the state-action pairs. After playing the game numerous times, the bird is able to consistently obtain high scores. 
 
@@ -23,7 +24,7 @@ I also changed the algorithm a bit. Instead of updating Q-values with each exper
 As it can be seen, after around 1500 game iterations, the bot learns to play quite well, averaging about 150 score, and also occasionally hitting very good max scores.
 
 ----------
-###Update
+### Update
 
 With **5x5 grids** instead of 10x10 (and also **y velocity** still in the state space), the convergence takes longer, but it converges to around 675 score, significantly beating the 150 score of the previous run. Also, the bird is able reach very high scores (3000+) quite many times.
 
