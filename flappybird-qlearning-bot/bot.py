@@ -2,9 +2,11 @@ import json
 
 
 class Bot(object):
-    # The Bot class that applies the Qlearning logic to Flappy bird game
-    # After every iteration (iteration = 1 game that ends with the bird dying) updates Q values
-    # After every DUMPING_N iterations, dumps the Q values to the local JSON file
+    '''
+    The Bot class that applies the Qlearning logic to Flappy bird game
+    After every iteration (iteration = 1 game that ends with the bird dying) updates Q values
+    After every DUMPING_N iterations, dumps the Q values to the local JSON file
+    '''
     def __init__(self):
         self.gameCNT = 0 # Game count of current run, incremented after every death
         self.DUMPING_N = 25 # Number of iterations to dump Q values to JSON after
@@ -17,7 +19,9 @@ class Bot(object):
         self.moves = []
 
     def load_qvalues(self):
-        # Load q values from a JSON file
+        '''
+        Load q values from a JSON file
+        '''
         self.qvalues = {}
         try:
             fil = open('qvalues.json', 'r')
@@ -27,7 +31,9 @@ class Bot(object):
         fil.close()
 
     def act(self, xdif, ydif, vel):
-        # Chooses the best action with respect to the current state - Chooses 0 (don't flap) to tie-break
+        '''
+        Chooses the best action with respect to the current state - Chooses 0 (don't flap) to tie-break
+        '''
         state = self.map_state(xdif, ydif, vel)
 
         self.moves.append( [self.last_state, self.last_action, state] ) # Add the experience to the history
@@ -46,7 +52,9 @@ class Bot(object):
 
 
     def update_scores(self):
-        #Update qvalues via iterating over experiences
+        '''
+        Update qvalues via iterating over experiences
+        '''
         history = list(reversed(self.moves))
 
         #Flag if the bird died in the top pipe
@@ -67,7 +75,6 @@ class Bot(object):
 
             else:
                 self.qvalues[state][act] = (1- self.lr) * (self.qvalues[state][act]) + (self.lr) * ( self.r[0] + (self.discount)*max(self.qvalues[res_state]) )
-
             t += 1
 
         self.gameCNT += 1 #increase game count
@@ -75,11 +82,13 @@ class Bot(object):
         self.moves = []  #clear history after updating strategies
 
     def map_state(self, xdif, ydif, vel):
-        # Map the (xdif, ydif, vel) to the respective state, with regards to the grids
-        # The state is a string, "xdif_ydif_vel"
+        '''
+        Map the (xdif, ydif, vel) to the respective state, with regards to the grids
+        The state is a string, "xdif_ydif_vel"
 
-        # X -> [-40,-30...120] U [140, 210 ... 420]
-        # Y -> [-300, -290 ... 160] U [180, 240 ... 420]
+        X -> [-40,-30...120] U [140, 210 ... 420]
+        Y -> [-300, -290 ... 160] U [180, 240 ... 420]
+        '''
         if xdif < 140:
             xdif = int(xdif) - (int(xdif) % 10)
         else:
@@ -93,7 +102,9 @@ class Bot(object):
         return str(int(xdif))+'_'+str(int(ydif))+'_'+str(vel)
 
     def dump_qvalues(self):
-        # Dump the qvalues to the JSON file
+        '''
+        Dump the qvalues to the JSON file
+        '''
         if self.gameCNT % self.DUMPING_N == 0:
             fil = open('qvalues.json', 'w')
             json.dump(self.qvalues, fil)
