@@ -235,8 +235,10 @@ def mainGame(movementInfo):
 
 
     while True:
-        if -playerx + lowerPipes[0]['x'] > -30: myPipe = lowerPipes[0]
-        else: myPipe = lowerPipes[1]
+        if -playerx + lowerPipes[0]['x'] > -30:
+            myPipe = lowerPipes[0]
+        else:
+            myPipe = lowerPipes[1]
 
         for event in pygame.event.get():
             if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
@@ -248,7 +250,7 @@ def mainGame(movementInfo):
                     playerFlapped = True
                     SOUNDS['wing'].play()
 
-        if  bot.act(-playerx + myPipe['x'], - playery + myPipe['y'], playerVelY ):
+        if bot.act(-playerx + myPipe['x'], - playery + myPipe['y'], playerVelY):
             if playery > -2 * IMAGES['player'][0].get_height():
                 playerVelY = playerFlapAcc
                 playerFlapped = True
