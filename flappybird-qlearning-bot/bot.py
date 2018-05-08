@@ -75,7 +75,7 @@ class Bot(object):
             else:
                 cur_reward = self.r[0]
 
-			# Update
+            # Update
             self.qvalues[state][act] = (1-self.lr) * (self.qvalues[state][act]) + \
                                         self.lr * ( cur_reward + self.discount*max(self.qvalues[res_state]) )
             t += 1
