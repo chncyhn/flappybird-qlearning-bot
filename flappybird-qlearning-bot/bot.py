@@ -65,16 +65,19 @@ class Bot(object):
             state = exp[0]
             act = exp[1]
             res_state = exp[2]
+
+            # Select reward
             if t == 1 or t == 2:
-                self.qvalues[state][act] = (1-self.lr) * (self.qvalues[state][act]) + \
-                                           self.lr * ( self.r[1] + self.discount*max(self.qvalues[res_state]) )
+                cur_reward = self.r[1]
             elif high_death_flag and act:
-                self.qvalues[state][act] = (1-self.lr) * (self.qvalues[state][act]) + \
-                                           self.lr * ( self.r[1] + self.discount*max(self.qvalues[res_state]) )
+                cur_reward = self.r[1]
                 high_death_flag = False
             else:
-                self.qvalues[state][act] = (1-self.lr) * (self.qvalues[state][act]) + \
-                                           self.lr * ( self.r[0] + self.discount*max(self.qvalues[res_state]) )
+                cur_reward = self.r[0]
+
+			# Update
+            self.qvalues[state][act] = (1-self.lr) * (self.qvalues[state][act]) + \
+                                        self.lr * ( cur_reward + self.discount*max(self.qvalues[res_state]) )
             t += 1
 
         self.gameCNT += 1  # increase game count
