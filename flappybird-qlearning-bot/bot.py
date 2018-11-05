@@ -7,11 +7,12 @@ class Bot(object):
     After every iteration (iteration = 1 game that ends with the bird dying) updates Q values
     After every DUMPING_N iterations, dumps the Q values to the local JSON file
     """
+
     def __init__(self):
-        self.gameCNT = 0 # Game count of current run, incremented after every death
-        self.DUMPING_N = 25 # Number of iterations to dump Q values to JSON after
+        self.gameCNT = 0  # Game count of current run, incremented after every death
+        self.DUMPING_N = 25  # Number of iterations to dump Q values to JSON after
         self.discount = 1.0
-        self.r = {0: 1, 1: -1000} # Reward function
+        self.r = {0: 1, 1: -1000}  # Reward function
         self.lr = 0.7
         self.load_qvalues()
         self.last_state = "420_240_0"
@@ -24,7 +25,7 @@ class Bot(object):
         """
         self.qvalues = {}
         try:
-            fil = open('qvalues.json', 'r')
+            fil = open("qvalues.json", "r")
         except IOError:
             return
         self.qvalues = json.load(fil)
@@ -36,9 +37,11 @@ class Bot(object):
         """
         state = self.map_state(xdif, ydif, vel)
 
-        self.moves.append( [self.last_state, self.last_action, state] ) # Add the experience to the history
+        self.moves.append(
+            (self.last_state, self.last_action, state)
+        )  # Add the experience to the history
 
-        self.last_state = state # Update the last_state with the current state
+        self.last_state = state  # Update the last_state with the current state
 
         if self.qvalues[state][0] >= self.qvalues[state][1]:
             self.last_action = 0
@@ -47,9 +50,6 @@ class Bot(object):
             self.last_action = 1
             return 1
 
-    def get_last_state(self):
-        return self.last_state
-
     def update_scores(self):
         """
         Update qvalues via iterating over experiences
@@ -57,7 +57,7 @@ class Bot(object):
         history = list(reversed(self.moves))
 
         # Flag if the bird died in the top pipe
-        high_death_flag = True if int(history[0][2].split('_')[1]) > 120 else False
+        high_death_flag = True if int(history[0][2].split("_")[1]) > 120 else False
 
         # Q-learning score updates
         t = 1
@@ -77,7 +77,7 @@ class Bot(object):
 
             # Update
             self.qvalues[state][act] = (1-self.lr) * (self.qvalues[state][act]) + \
-                                        self.lr * ( cur_reward + self.discount*max(self.qvalues[res_state]) )
+                                       self.lr * ( cur_reward + self.discount*max(self.qvalues[res_state]) )
             t += 1
 
         self.gameCNT += 1  # increase game count
@@ -102,14 +102,14 @@ class Bot(object):
         else:
             ydif = int(ydif) - (int(ydif) % 60)
 
-        return str(int(xdif))+'_'+str(int(ydif))+'_'+str(vel)
+        return str(int(xdif)) + "_" + str(int(ydif)) + "_" + str(vel)
 
     def dump_qvalues(self):
         """
         Dump the qvalues to the JSON file
         """
         if self.gameCNT % self.DUMPING_N == 0:
-            fil = open('qvalues.json', 'w')
+            fil = open("qvalues.json", "w")
             json.dump(self.qvalues, fil)
             fil.close()
-            print('Q-values updated on local file.')
+            print("Q-values updated on local file.")
