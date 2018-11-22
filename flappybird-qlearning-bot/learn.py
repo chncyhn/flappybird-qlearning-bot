@@ -29,14 +29,14 @@ BASE = [336, 112]
 BACKGROUND = [288, 512]
 
 def main():
-    global HITMASKS, ITERATIONS, CMD_OUTPUT, bot
+    global HITMASKS, ITERATIONS, VERBOSE, bot
 
     parser = argparse.ArgumentParser("learn.py")
     parser.add_argument('iter', type=int, default=5000, help='number of iterations to run')
-    parser.add_argument('--cmd_out', action='store_true', help='output [iteration | score] to cmd')
+    parser.add_argument('--verbose', action='store_true', help='output [iteration | score] to stdout')
     args = parser.parse_args()
     ITERATIONS = args.iter
-    CMD_OUTPUT = args.cmd_out
+    VERBOSE = args.verbose
 
     # load dumped HITMASKS
     with open('hitmasks_data.pkl', 'rb') as input:
@@ -174,12 +174,12 @@ def mainGame(movementInfo):
 
 
 def showGameOverScreen(crashInfo):
-    if CMD_OUTPUT:
+    if VERBOSE:
         score = crashInfo['score']
         print(str(bot.gameCNT - 1) + " | " + str(score))
 
     if bot.gameCNT == (ITERATIONS):
-        bot.dump_qvalues(always_dump=True)
+        bot.dump_qvalues(force=True)
         sys.exit()
 
 def playerShm(playerShm):
