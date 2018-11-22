@@ -4,6 +4,9 @@ from bot import Bot
 import random
 import sys
 
+import argparse
+import pickle
+
 import pygame
 from pygame.locals import *
 
@@ -56,7 +59,15 @@ PIPES_LIST = (
 
 
 def main():
-    global SCREEN, FPSCLOCK, bot
+    global SCREEN, FPSCLOCK, FPS, bot
+
+    parser = argparse.ArgumentParser("flappy.py")
+    parser.add_argument('--fps', type=int, default=60, help='number of frames per second')
+    parser.add_argument('--dump_hitmasks', action='store_true', help='dump hitmasks to file and exit')
+    args = parser.parse_args()
+
+    FPS = args.fps
+
     pygame.init()
     FPSCLOCK = pygame.time.Clock()
     SCREEN = pygame.display.set_mode((SCREENWIDTH, SCREENHEIGHT))
@@ -128,6 +139,11 @@ def main():
             getHitmask(IMAGES['player'][1]),
             getHitmask(IMAGES['player'][2]),
         )
+
+        if args.dump_hitmasks:
+            with open('hitmasks_data.pkl', 'wb') as output:
+                pickle.dump(HITMASKS, output, pickle.HIGHEST_PROTOCOL)
+            sys.exit()
 
         movementInfo = showWelcomeAnimation()
         crashInfo = mainGame(movementInfo)
