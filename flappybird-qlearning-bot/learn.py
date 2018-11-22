@@ -179,7 +179,7 @@ def showGameOverScreen(crashInfo):
         print(str(bot.gameCNT - 1) + " | " + str(score))
 
     if bot.gameCNT == (ITERATIONS):
-        bot.dump_qvalues(allways_dump=True)
+        bot.dump_qvalues(always_dump=True)
         sys.exit()
 
 def playerShm(playerShm):

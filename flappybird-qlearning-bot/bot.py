@@ -105,11 +105,11 @@ class Bot(object):
 
         return str(int(xdif)) + "_" + str(int(ydif)) + "_" + str(vel)
 
-    def dump_qvalues(self, allways_dump = False):
+    def dump_qvalues(self, always_dump = False):
         """
         Dump the qvalues to the JSON file
         """
-        if self.gameCNT % self.DUMPING_N == 0 or allways_dump:
+        if self.gameCNT % self.DUMPING_N == 0 or always_dump:
             fil = open("qvalues.json", "w")
             json.dump(self.qvalues, fil)
             fil.close()
