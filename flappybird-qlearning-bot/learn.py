@@ -13,8 +13,6 @@ from pygame.locals import *
 # Initialize the bot
 bot = Bot()
 
-FPS = 60
-ITERATIONS = 5000
 SCREENWIDTH  = 288
 SCREENHEIGHT = 512
 # amount by which base can maximum shift to left
@@ -29,8 +27,6 @@ PIPE = [52, 320]
 PLAYER = [34, 24]
 BASE = [336, 112]
 BACKGROUND = [288, 512]
-
-CMD_OUTPUT = False
 
 def main():
     global HITMASKS, ITERATIONS, CMD_OUTPUT, bot
