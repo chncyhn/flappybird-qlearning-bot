@@ -50,7 +50,7 @@ class Bot(object):
             self.last_action = 1
             return 1
 
-    def update_scores(self):
+    def update_scores(self, dump_qvalues = True):
         """
         Update qvalues via iterating over experiences
         """
@@ -81,7 +81,8 @@ class Bot(object):
             t += 1
 
         self.gameCNT += 1  # increase game count
-        self.dump_qvalues()  # Dump q values (if game count % DUMPING_N == 0)
+        if dump_qvalues:
+            self.dump_qvalues()  # Dump q values (if game count % DUMPING_N == 0)
         self.moves = []  # clear history after updating strategies
 
     def map_state(self, xdif, ydif, vel):
@@ -104,11 +105,11 @@ class Bot(object):
 
         return str(int(xdif)) + "_" + str(int(ydif)) + "_" + str(vel)
 
-    def dump_qvalues(self):
+    def dump_qvalues(self, force = False):
         """
         Dump the qvalues to the JSON file
         """
-        if self.gameCNT % self.DUMPING_N == 0:
+        if self.gameCNT % self.DUMPING_N == 0 or force:
             fil = open("qvalues.json", "w")
             json.dump(self.qvalues, fil)
             fil.close()
