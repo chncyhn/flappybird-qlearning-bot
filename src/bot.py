@@ -25,7 +25,7 @@ class Bot(object):
         """
         self.qvalues = {}
         try:
-            fil = open("qvalues.json", "r")
+            fil = open("data/qvalues.json", "r")
         except IOError:
             return
         self.qvalues = json.load(fil)
@@ -50,7 +50,7 @@ class Bot(object):
             self.last_action = 1
             return 1
 
-    def update_scores(self, dump_qvalues = True):
+    def update_scores(self, dump_qvalues=True):
         """
         Update qvalues via iterating over experiences
         """
@@ -78,6 +78,7 @@ class Bot(object):
             # Update
             self.qvalues[state][act] = (1-self.lr) * (self.qvalues[state][act]) + \
                                        self.lr * ( cur_reward + self.discount*max(self.qvalues[res_state]) )
+
             t += 1
 
         self.gameCNT += 1  # increase game count
@@ -105,12 +106,12 @@ class Bot(object):
 
         return str(int(xdif)) + "_" + str(int(ydif)) + "_" + str(vel)
 
-    def dump_qvalues(self, force = False):
+    def dump_qvalues(self, force=False):
         """
         Dump the qvalues to the JSON file
         """
         if self.gameCNT % self.DUMPING_N == 0 or force:
-            fil = open("qvalues.json", "w")
+            fil = open("data/qvalues.json", "w")
             json.dump(self.qvalues, fil)
             fil.close()
             print("Q-values updated on local file.")

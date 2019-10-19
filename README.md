@@ -6,6 +6,20 @@ A Flappy Bird bot in Python, that learns from each game played via Q-Learning.
 
 [Youtube Link](https://www.youtube.com/watch?v=79BWQUN_Njc) 
 
+----------
+### Running
+
+Only dependency of the project is `pygame`.
+
+- `src/flappy.py` - Run to see the actual visual gameplay.
+- `src/learn.py` - Run for faster learning/training. This runs without any pygame visualization, so it's much faster.
+  - The following command-line args are available:
+    - `--verbose` to see `iteration | score` pair printed at each iteration. (Iteration = a bird playing from start until death)
+    - `--iter` number of iterations to run.
+- `src/initialize_qvalues.py` - Run if you want to reset the q-values, so you can observe how the bird learns to play over time.
+- `src/bot.py` - This file contains the `Bot` class that applies the Q-Learning logic to the game.
+
+----------
 ### How it works
 
 With every game played, the bird observes the states it has been in, and the actions it took. With regards to their outcomes, it punishes or rewards the state-action pairs. After playing the game numerous times, the bird is able to consistently obtain high scores. 
